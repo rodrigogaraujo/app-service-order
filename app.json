@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "g3infotech",
+    "slug": "g3infotech",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
