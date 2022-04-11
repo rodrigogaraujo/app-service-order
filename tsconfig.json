@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "experimentalDecorators": true,
+    "jsx": "react-native",
+    "rootDirs": ["src"],
+    "target": "es2017",
+    "baseUrl": "src",
+    "paths": {
+      "~/*": ["*"]
+    },
+    "typeRoots": [
+      "./node_modules/@types/"
+    ]
+  },
+  "extends": "expo/tsconfig.base",
+  "exclude": [
+    "__tests__/**/*-test.ts",
+    "node_modules",
+    "storybook"
+  ],
+  "moduleResolution": "node"
+}
