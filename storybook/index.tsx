@@ -10,6 +10,8 @@ import AsyncStorage from '@react-native-community/async-storage'
 import './rn-addons'
 
 import App from '../src/App'
+import theme from '../src/config/theme'
+import { ThemeProvider } from 'styled-components/native'
 
 // enables knobs for all stories
 addDecorator(withKnobs)
@@ -24,10 +26,15 @@ configure(() => {
 // To find allowed options for getStorybookUI
 const StorybookUIRoot = getStorybookUI({
   asyncStorage: AsyncStorage,
+  onDeviceUI: true,
 })
 
 const StoryBookRoot = () => {
-  return <StorybookUIRoot />
+  return (
+    <ThemeProvider theme={theme}>
+      <StorybookUIRoot />
+    </ThemeProvider>
+  )
 }
 
 // If you are using React Native vanilla and after installation you don't see your app name here, write it manually.
