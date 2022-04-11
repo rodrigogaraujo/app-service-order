@@ -1,7 +1,8 @@
+import { Platform } from 'react-native'
 import Reactotron from 'reactotron-react-native'
 
 Reactotron.configure({
-  host: '10.0.2.2'
+  host: Platform.OS === 'android' ? '10.0.2.2' : 'localhost'
 }).useReactNative({
   storybook: true,
 }).connect()
