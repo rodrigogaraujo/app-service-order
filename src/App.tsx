@@ -2,6 +2,8 @@ import React from 'react'
 import AppLoading from 'expo-app-loading'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { useFonts, Montserrat_400Regular, Montserrat_700Bold } from '@expo-google-fonts/montserrat'
+import { ThemeProvider } from 'styled-components'
+import theme from '~/config/theme'
 import { Home } from './screens/Home'
 
 export default function App() {
@@ -15,9 +17,11 @@ export default function App() {
     return <AppLoading />
   } else {
     return (
-      <QueryClientProvider client={queryClient}>
-        <Home />
-      </QueryClientProvider>
+      <ThemeProvider theme={theme}>
+        <QueryClientProvider client={queryClient}>
+          <Home />
+        </QueryClientProvider>
+      </ThemeProvider>
     )
   }
 }

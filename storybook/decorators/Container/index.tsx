@@ -1,20 +1,12 @@
 import React from 'react'
-import { View } from 'react-native'
-import { ThemeProvider } from 'styled-components'
+import { DecoratorFunction } from '@storybook/addons'
+import { ContainerCentered } from '../../../src/components/ContainerCentered'
+import { SafeArea } from '../../../src/components/SafeArea'
 
-import theme from '../../../src/config/theme'
-
-export const Container = (storyFn: any) => {
+export const Container: DecoratorFunction = (storyFn: any) => {
   return (
-    <View
-      style={{
-        flex: 1,
-        padding: 40,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      {storyFn}
-    </View>
+    <SafeArea>
+      <ContainerCentered>{storyFn()}</ContainerCentered>
+    </SafeArea>
   )
 }

@@ -1,15 +1,13 @@
 import React from 'react'
 
 import { storiesOf } from '@storybook/react-native'
-import { Label } from '../../../src/components'
+import { text, radios } from '@storybook/addon-knobs'
 
-import { text, optionsKnob } from '@storybook/addon-knobs'
+import { Label, H1 } from '../../../src/components'
 
-import { Container } from '../../decorators/Container'
 import theme from '../../../src/config/theme'
 
 storiesOf('Components/Label', module)
-  .addDecorator(Container)
   .addParameters({
     component: Label,
     backgrounds: [
@@ -17,9 +15,9 @@ storiesOf('Components/Label', module)
       { name: 'dark', value: theme.colors.dark, default: true },
     ],
   })
-  .add('Label', () => (
+  .add('Label normal', () => (
     <Label
-      color={optionsKnob(
+      color={radios(
         'Label Color',
         {
           Primary: 'primary',
@@ -29,15 +27,10 @@ storiesOf('Components/Label', module)
           'Gray Secondary': 'gray_secondary',
           Dark: 'dark',
         },
-        'primary',
-        {
-          display: 'inline-radio',
-        }
+        'primary'
       )}
     >
       {text('Content', 'Label test')}
     </Label>
   ))
-  .add('Label primary', () => (
-    <Label color='primary'>{text('Content', 'Label test primary')}</Label>
-  ))
+  .add('Title H1', () => <H1 color='primary'>{text('Content', 'Label test primary')}</H1>)
