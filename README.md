@@ -9,6 +9,8 @@ Using tools like react-native-testing-library, react-query, reanimated and other
 - React native testing library
 - React query
 - Reanimated
+- React Rook Form
+- Yup
 
 # Prints
 
