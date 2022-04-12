@@ -1,3 +1,5 @@
+import { RFValue } from "react-native-responsive-fontsize";
+
 export default {
   colors: {
     primary: '#40B38C',
@@ -12,12 +14,12 @@ export default {
     regular: 'Montserrat_400Regular',
     bold: 'Montserrat_700Bold',
     sizes: {
-      small: '12px',
-      regular: '14px',
-      medium: '16px',
-      bigger_light: '22px',
-      bigger: '30px',
+      small: `${RFValue(12)}px`,
+      regular: `${RFValue(14)}px`,
+      medium: `${RFValue(16)}px`,
+      bigger_light: `${RFValue(22)}px`,
+      bigger: `${RFValue(30)}px`,
     },
   },
-  radius: '10px',
+  radius: `${RFValue(12)}px`,
 };

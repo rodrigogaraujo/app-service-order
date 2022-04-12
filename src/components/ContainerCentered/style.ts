@@ -1,3 +1,4 @@
+import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native'
 
 export const ContainerCenter = styled.View`
@@ -5,4 +6,5 @@ export const ContainerCenter = styled.View`
   align-items: center;
   justify-content: center;
   background-color: ${({theme}) => theme.colors.white};
+  padding: ${RFValue(40)}px;
 `;
