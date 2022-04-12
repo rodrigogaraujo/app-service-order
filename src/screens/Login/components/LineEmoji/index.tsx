@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { View } from 'react-native'
 import { EmojiSmille } from '~/assets/svgs/EmojiSmille'
 import { ContainerRow, H3 } from '~/components'
 import { ViewEmoji } from './styles'
