@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import AppLoading from 'expo-app-loading'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { useFonts, Montserrat_400Regular, Montserrat_700Bold } from '@expo-google-fonts/montserrat'
+import { NavigationContainer, NavigationContainerRef } from '@react-navigation/native'
 import { ThemeProvider } from 'styled-components'
 import theme from '~/config/theme'
-import { Home } from './screens/Home'
+import { RootStackParamList, Routes } from './routes'
+import AppProvider from './hooks'
 
 export default function App() {
+  const navigation = useRef<NavigationContainerRef<RootStackParamList> | null>(null)
   const queryClient = new QueryClient()
   let [fontsLoaded] = useFonts({
     Montserrat_400Regular,
@@ -17,11 +20,15 @@ export default function App() {
     return <AppLoading />
   } else {
     return (
-      <ThemeProvider theme={theme}>
-        <QueryClientProvider client={queryClient}>
-          <Home />
-        </QueryClientProvider>
-      </ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <AppProvider>
+          <NavigationContainer ref={navigation}>
+            <ThemeProvider theme={theme}>
+              <Routes />
+            </ThemeProvider>
+          </NavigationContainer>
+        </AppProvider>
+      </QueryClientProvider>
     )
   }
 }
