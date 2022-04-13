@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import AppLoading from 'expo-app-loading'
+import { LogBox } from 'react-native'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { useFonts, Montserrat_400Regular, Montserrat_700Bold } from '@expo-google-fonts/montserrat'
 import { NavigationContainer, NavigationContainerRef } from '@react-navigation/native'
@@ -15,6 +16,8 @@ export default function App() {
     Montserrat_400Regular,
     Montserrat_700Bold,
   })
+
+  LogBox.ignoreAllLogs()
 
   if (!fontsLoaded) {
     return <AppLoading />

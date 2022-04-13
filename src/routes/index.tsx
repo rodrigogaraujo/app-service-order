@@ -2,6 +2,7 @@ import * as React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { Home } from '~/screens/Home'
 import { Login } from '~/screens/Login'
+import { useAuth } from '~/hooks/Auth'
 
 export type RootStackParamList = {
   Login: undefined
@@ -10,6 +11,7 @@ export type RootStackParamList = {
 const RootStack = createNativeStackNavigator<RootStackParamList>()
 
 export const Routes = () => {
+  const { user, token } = useAuth()
   return (
     <RootStack.Navigator
       screenOptions={{
@@ -17,8 +19,15 @@ export const Routes = () => {
         animation: 'slide_from_right',
       }}
     >
-      <RootStack.Screen name='Login' component={Login} />
-      <RootStack.Screen name='Home' component={Home} />
+      {!user && !token ? (
+        <>
+          <RootStack.Screen name='Login' component={Login} />
+        </>
+      ) : (
+        <>
+          <RootStack.Screen name='Home' component={Home} />
+        </>
+      )}
     </RootStack.Navigator>
   )
 }

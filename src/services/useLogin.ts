@@ -6,7 +6,8 @@ import api from "./api"
 export interface User {
   name: string
   email: string
-  is_admin: boolean
+  type: string
+  active: boolean
 }
   
 type Payload = {
@@ -16,9 +17,9 @@ type Payload = {
 
 export const useLogin = (options: UseMutationOptions<Payload, any, SignInCredentials>) => {
   return useMutation<Payload, AxiosError, SignInCredentials>(
-    '/session',
+    '/sessions',
     async ({email, password}) => {
-      const resp = await api.post('/session', {
+      const resp = await api.post('/sessions', {
         email, password
       })
       return resp.data

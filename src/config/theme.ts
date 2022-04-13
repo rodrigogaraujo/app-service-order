@@ -18,7 +18,7 @@ export default {
       regular: `${RFValue(14)}px`,
       medium: `${RFValue(16)}px`,
       bigger_light: `${RFValue(22)}px`,
-      bigger: `${RFValue(30)}px`,
+      bigger: `${RFValue(40)}px`,
     },
   },
   radius: `${RFValue(12)}px`,

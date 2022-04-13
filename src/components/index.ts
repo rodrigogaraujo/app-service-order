@@ -1,3 +1,4 @@
+import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native'
 
 interface IText {
@@ -6,6 +7,10 @@ interface IText {
 
 interface IContainerRowProps {
   align?: 'flex-start' | 'flex-end' | 'center'
+}
+
+interface IContainerProps {
+  padding?: number
 }
 
 export const Label = styled.Text<IText>`
@@ -36,6 +41,7 @@ export const H1 = styled.Text<IText>`
   font-family: ${({theme}) => theme.font.bold};
   font-size: ${({theme}) => theme.font.sizes.bigger};
   color: ${({theme, color}) => theme.colors[color || 'dark']};
+  line-height: ${RFValue(40)}px;
 `;
 
 export const ContainerRow = styled.View<IContainerRowProps>`
@@ -44,3 +50,9 @@ export const ContainerRow = styled.View<IContainerRowProps>`
   justify-content: ${({align}) => align || 'center'};
   width: 100%;
 `;
+
+export const Container = styled.View<IContainerProps>`
+  flex: 1;
+  padding: ${({padding}) => RFValue(padding || 40)}px
+`;
+
