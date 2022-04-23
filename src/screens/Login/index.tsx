@@ -13,6 +13,7 @@ import { LineEmoji } from './components/LineEmoji'
 import { TitleLogin, WrapperButton, WrapperForm } from './styles'
 import { Button } from '~/components/Button'
 import { useLogin } from '~/services/useLogin'
+import { ScrollView } from 'react-native'
 
 export const Login = () => {
   const { signIn } = useAuth()
@@ -54,7 +55,7 @@ export const Login = () => {
       } else {
         Snackbar.show({
           text: 'Usuário inativo, fale com seu administrador.',
-          duration: Snackbar.LENGTH_LONG,
+          duration: 5000,
           textColor: theme.colors.white,
           backgroundColor: theme.colors.secondary,
           fontFamily: theme.font.regular,
@@ -71,7 +72,7 @@ export const Login = () => {
           er.response.data.error.message
             ? er.response.data.error.message
             : 'Email e senha incorretos',
-        duration: Snackbar.LENGTH_LONG,
+        duration: 5000,
         textColor: theme.colors.white,
         backgroundColor: theme.colors.secondary,
         fontFamily: theme.font.regular,
@@ -81,60 +82,62 @@ export const Login = () => {
 
   return (
     <SafeArea>
-      <Container>
-        <TitleLogin color='primary'>{`Controle \nsuas ordens\nde serviço`}</TitleLogin>
-        <LineEmoji text={`Faça seu login com \nseu email e senha`} />
-        <WrapperForm>
-          <Controller
-            control={control}
-            name='email'
-            render={({ field: { onChange, onBlur, value } }) => (
-              <Input
-                placeholder='Seu email'
-                accessibilityLabel='Seu email'
-                testID='email'
-                defaultValue=''
-                value={value}
-                hasValidation
-                autoCorrect={false}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                keyboardType='email-address'
-                autoCapitalize='none'
-                error={!!errors?.email}
-              />
-            )}
-          />
-          <Controller
-            control={control}
-            name='password'
-            render={({ field: { onChange, onBlur, value } }) => (
-              <Input
-                placeholder='Sua senha'
-                accessibilityLabel='Sua senha'
-                testID='password'
-                defaultValue=''
-                autoCapitalize='none'
-                autoCorrect={false}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                hasValidation
-                error={!!errors?.password}
-                password
-              />
-            )}
-          />
-          <WrapperButton>
-            <Button
-              text='Entrar'
-              loading={loading}
-              onPress={handleSubmit(onSubmit)}
-              testID='login-button'
+      <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
+        <Container>
+          <TitleLogin color='primary'>{`Controle \nsuas ordens\nde serviço`}</TitleLogin>
+          <LineEmoji text={`Faça seu login com \nseu email e senha`} />
+          <WrapperForm>
+            <Controller
+              control={control}
+              name='email'
+              render={({ field: { onChange, onBlur, value } }) => (
+                <Input
+                  placeholder='Seu email'
+                  accessibilityLabel='Seu email'
+                  testID='email'
+                  defaultValue=''
+                  value={value}
+                  hasValidation
+                  autoCorrect={false}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  keyboardType='email-address'
+                  autoCapitalize='none'
+                  error={!!errors?.email}
+                />
+              )}
             />
-          </WrapperButton>
-        </WrapperForm>
-      </Container>
+            <Controller
+              control={control}
+              name='password'
+              render={({ field: { onChange, onBlur, value } }) => (
+                <Input
+                  placeholder='Sua senha'
+                  accessibilityLabel='Sua senha'
+                  testID='password'
+                  defaultValue=''
+                  autoCapitalize='none'
+                  autoCorrect={false}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  hasValidation
+                  error={!!errors?.password}
+                  password
+                />
+              )}
+            />
+            <WrapperButton>
+              <Button
+                text='Entrar'
+                loading={loading}
+                onPress={handleSubmit(onSubmit)}
+                testID='login-button'
+              />
+            </WrapperButton>
+          </WrapperForm>
+        </Container>
+      </ScrollView>
     </SafeArea>
   )
 }

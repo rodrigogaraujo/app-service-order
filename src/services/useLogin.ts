@@ -8,6 +8,7 @@ export interface User {
   email: string
   type: string
   active: boolean
+  _id: string
 }
   
 type Payload = {

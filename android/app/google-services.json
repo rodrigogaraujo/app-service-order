@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "80557282660",
+    "project_id": "service-order-7dcff",
+    "storage_bucket": "service-order-7dcff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:80557282660:android:7db3c92b01ebebfc695671",
+        "android_client_info": {
+          "package_name": "com.g3infotech"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "80557282660-3tkp6qsas41kemkvgk93teh9mog27kqa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC292S2GEB5ICJIbwxk5lJEyEcSQkyzgms"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "80557282660-3tkp6qsas41kemkvgk93teh9mog27kqa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

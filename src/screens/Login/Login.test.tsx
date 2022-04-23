@@ -4,8 +4,6 @@ import { fireEvent, cleanup } from '@testing-library/react-native'
 import { Login } from '.'
 import { render } from '~/helpers'
 
-afterEach(cleanup)
-
 describe('sign in screen', () => {
   test('should be able to login', () => {
     const { getByTestId, getByText } = render(<Login />)

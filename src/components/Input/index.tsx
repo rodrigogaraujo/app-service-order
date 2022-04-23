@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { TextInputProps } from 'react-native'
 import { RFValue } from 'react-native-responsive-fontsize'
+import { useTheme } from 'styled-components'
 
 import {
   Container,
@@ -20,9 +21,15 @@ interface Props extends TextInputProps {
 
 export const Input = ({ password, hasValidation, error, value, ...rest }: Props) => {
   const [showPass, setShowPass] = useState(password ? true : false)
+  const theme = useTheme()
   return (
     <Container>
-      <TextInputStyled {...rest} value={value} secureTextEntry={showPass ? true : false} />
+      <TextInputStyled
+        {...rest}
+        value={value}
+        selectionColor={theme.colors.primary}
+        secureTextEntry={showPass ? true : false}
+      />
       {hasValidation && error && !password ? (
         <IconStyled type='error' name='close-circle' size={RFValue(20)} testID='input-error' />
       ) : null}

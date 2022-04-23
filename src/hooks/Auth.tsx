@@ -1,5 +1,7 @@
 import AsyncStorage from '@react-native-community/async-storage'
 import React, { createContext, useContext, useEffect, useState } from 'react'
+import OneSignal from 'react-native-onesignal'
+
 import api from '~/services/api'
 import { User } from '~/services/useLogin'
 
@@ -58,6 +60,24 @@ export const AuthProvider: React.FC = ({ children }: any) => {
       ['@serviceOrder:user', JSON.stringify(user)],
     ])
     setData({ token, user })
+
+    const oneSignalResp = await OneSignal.getDeviceState()
+    api.defaults.headers.common['Authorization'] = `Bearer ${token}`
+    try {
+      await api.put(
+        `/user-token/${user._id}`,
+        {
+          device_token: oneSignalResp?.userId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+    } catch (er) {
+      console.log(er)
+    }
   }
 
   const signOut = async () => {
