@@ -1,12 +1,17 @@
 import React from 'react'
-import { fireEvent, cleanup } from '@testing-library/react-native'
+import { ThemeProvider } from 'styled-components'
 
 import { Login } from '.'
-import { render } from '~/helpers'
+import { render, fireEvent } from '~/helpers'
+import theme from '~/config/theme'
 
 describe('sign in screen', () => {
   test('should be able to login', () => {
-    const { getByTestId, getByText } = render(<Login />)
+    const { getByTestId, getByText } = render(
+      <ThemeProvider theme={theme}>
+        <Login />
+      </ThemeProvider>
+    )
     const email = 'rodrigoaraujo990@gmail.com'
     const password = '12345678'
 
@@ -23,7 +28,11 @@ describe('sign in screen', () => {
   })
 
   test('should be able to show error to incorrect mail', async () => {
-    const { getByTestId, findByTestId } = render(<Login />)
+    const { getByTestId, findByTestId } = render(
+      <ThemeProvider theme={theme}>
+        <Login />
+      </ThemeProvider>
+    )
     const email = 'rodrigoaraujo990'
 
     const inputMail = getByTestId('email')
@@ -38,7 +47,11 @@ describe('sign in screen', () => {
   })
 
   test('should be able to show error to empty pass', async () => {
-    const { getByTestId, findByTestId } = render(<Login />)
+    const { getByTestId, findByTestId } = render(
+      <ThemeProvider theme={theme}>
+        <Login />
+      </ThemeProvider>
+    )
     const password = ''
 
     const inputPass = getByTestId('password')

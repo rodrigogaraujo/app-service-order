@@ -11,9 +11,8 @@ import { RootStackParamList, Routes } from './routes'
 import AppProvider from './hooks'
 
 export const queryClient = new QueryClient()
-
 export default function App() {
-  const navigation = useRef<NavigationContainerRef<RootStackParamList> | null>(null)
+  const navigationApp = useRef<NavigationContainerRef<RootStackParamList> | null>(null)
   let [fontsLoaded] = useFonts({
     Montserrat_400Regular,
     Montserrat_700Bold,
@@ -27,7 +26,7 @@ export default function App() {
     return (
       <QueryClientProvider client={queryClient}>
         <AppProvider>
-          <NavigationContainer ref={navigation}>
+          <NavigationContainer ref={navigationApp}>
             <ThemeProvider theme={theme}>
               <Routes />
             </ThemeProvider>

@@ -55,7 +55,7 @@ export const Login = () => {
       } else {
         Snackbar.show({
           text: 'Usuário inativo, fale com seu administrador.',
-          duration: 5000,
+          duration: Snackbar.LENGTH_LONG,
           textColor: theme.colors.white,
           backgroundColor: theme.colors.secondary,
           fontFamily: theme.font.regular,
@@ -72,7 +72,7 @@ export const Login = () => {
           er.response.data.error.message
             ? er.response.data.error.message
             : 'Email e senha incorretos',
-        duration: 5000,
+        duration: Snackbar.LENGTH_LONG,
         textColor: theme.colors.white,
         backgroundColor: theme.colors.secondary,
         fontFamily: theme.font.regular,

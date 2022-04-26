@@ -1,5 +1,6 @@
 import { AxiosError } from 'axios'
 import { useMutation, UseMutationOptions, useQuery,  } from 'react-query'
+import { queryClient } from '~/App'
 import { IServiceOrder } from '~/types'
 import api from './api'
 
@@ -29,12 +30,20 @@ export const useGetServiceOrders = () => {
   )
 }
 
-export const useUpdateServiceOrder = (options: UseMutationOptions<IServiceOrder, any, IServiceOrder>) => {
+export const useUpdateServiceOrderStatus = (options: UseMutationOptions<IServiceOrder, any, IServiceOrder>) => {
   return useMutation<IServiceOrder, AxiosError, IServiceOrder>(
-    '/service-order-update',
+    '/service-order-update-status',
     async (data) => {
-      const resp = await api.put(`/service-order/${data._id}`, {
+      const resp = await api.put(`/service-order-status/${data._id}`, {
         ...data
+      })
+      queryClient.setQueriesData<IServiceOrder[]>('/service-order', (old) => {
+        const newItem: IServiceOrder = resp.data
+        const oldData: IServiceOrder[] = old?.filter(item => item._id !== newItem._id) as IServiceOrder[] 
+        if (oldData.length) {
+          return [...oldData, newItem]
+        }
+        return [newItem]
       })
       return resp.data
     },

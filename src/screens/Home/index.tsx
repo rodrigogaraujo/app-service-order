@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react'
 import OneSignal from 'react-native-onesignal'
-import { ActivityIndicator, Alert, ScrollView } from 'react-native'
+import { ActivityIndicator, Alert, Dimensions, ScrollView, View } from 'react-native'
 import { useTheme } from 'styled-components'
+import Snackbar from 'react-native-snackbar'
 
 import { ONE_SIGNAL_KEY } from '@env'
 import { useGetServiceOrders } from '~/services/useServiceOrder'
 import { ServiceOrderRow } from './components/ServiceOrderRow'
 import { SafeArea } from '~/components/SafeArea'
-import { Container } from '~/components'
+import { Container, H3 } from '~/components'
 
 export const Home = () => {
   const theme = useTheme()
-
+  const { width, height } = Dimensions.get('window')
   const { isLoading, data, isError, error } = useGetServiceOrders()
 
   if (isError) {
@@ -35,35 +36,53 @@ export const Home = () => {
     OneSignal.setRequiresUserPrivacyConsent(false)
     OneSignal.setNotificationWillShowInForegroundHandler((notifReceivedEvent) => {
       let notif = notifReceivedEvent.getNotification()
-      const button = {
-        text: 'Ok',
-        onPress: () => {
-          notifReceivedEvent.complete(notif)
-        },
-      }
-
-      Alert.alert(notif.title ? notif.title : 'Service Order', notif.body, [button], {
-        cancelable: true,
+      Snackbar.show({
+        text: `${notif.body}`,
+        duration: Snackbar.LENGTH_LONG,
+        textColor: theme.colors.white,
+        backgroundColor: theme.colors.primary,
       })
+      notifReceivedEvent.complete(notif)
     })
   }, [])
 
   return (
     <SafeArea>
       <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
-        <Container>
-          {isLoading ? (
-            <ActivityIndicator color={theme.colors.primary} size='large' />
-          ) : (
-            <>
-              {data && data.length
-                ? data
-                    .filter((item) => item.status !== 3)
-                    .map((item) => <ServiceOrderRow key={item._id} serviceOrder={item} />)
-                : null}
-            </>
-          )}
-        </Container>
+        {data && data.length && data.filter((item) => item.status !== 3).length ? (
+          <Container>
+            {isLoading ? (
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <ActivityIndicator color={theme.colors.primary} size='large' />
+              </View>
+            ) : (
+              <>
+                {data && data.length
+                  ? data
+                      .filter((item) => item.status !== 3)
+                      .map((item) => <ServiceOrderRow key={item._id} serviceOrder={item} />)
+                  : null}
+              </>
+            )}
+          </Container>
+        ) : isLoading ? null : (
+          <View
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              height,
+              width,
+            }}
+          >
+            <H3 color='primary'>Sem ordem de serviço no momento</H3>
+          </View>
+        )}
       </ScrollView>
     </SafeArea>
   )

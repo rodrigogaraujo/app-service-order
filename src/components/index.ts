@@ -2,7 +2,9 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native'
 
 interface IText {
-  color?: 'primary' | 'primary_light' | 'secondary' | 'gray' | 'gray_secondary' | 'dark'
+  color?: 'primary' | 'primary_light' | 'secondary' | 'gray' | 'gray_secondary' | 'dark' | 'white'
+  align?: 'center' | 'left' | 'right'
+  fullWidth?: boolean
 }
 
 interface IContainerRowProps {
@@ -35,6 +37,8 @@ export const H2 = styled.Text<IText>`
   font-family: ${({theme}) => theme.font.bold};
   font-size: ${({theme}) => theme.font.sizes.bigger_light};
   color: ${({theme, color}) => theme.colors[color || 'dark']};
+  text-align: ${({align}) => align ? align : 'left'};
+  width: ${({fullWidth}) => fullWidth ? '100%' : 'auto'}; 
 `;
 
 export const H1 = styled.Text<IText>`
@@ -53,6 +57,5 @@ export const ContainerRow = styled.View<IContainerRowProps>`
 
 export const Container = styled.View<IContainerProps>`
   flex: 1;
-  padding: ${({padding}) => RFValue(padding || 40)}px
+  padding: ${({padding}) => RFValue(padding || 40)}px;
 `;
-

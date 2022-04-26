@@ -14,7 +14,9 @@ export const LineEmoji = ({ text }: IProps) => {
       <ViewEmoji>
         <EmojiSmille />
       </ViewEmoji>
-      <H3 color='gray'>{text}</H3>
+      <H3 color='gray' testID='text-description'>
+        {text}
+      </H3>
     </ContainerRow>
   )
 }

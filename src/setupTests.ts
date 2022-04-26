@@ -1,8 +1,6 @@
 import '@testing-library/jest-native/extend-expect'
 import { cleanup } from '@testing-library/react-native'
-import 'react-native-gesture-handler/jestSetup'
 import { queryClient } from './App'
-
 
 afterEach(() => {
   cleanup()
@@ -12,15 +10,15 @@ afterEach(() => {
 jest.mock('@react-native-community/async-storage', () =>
   require('@react-native-community/async-storage/jest/async-storage-mock')
 )
-jest.mock('react-native-onesignal', () => {
-  return {
-    setAppId: jest.fn(),
-    setLogLevel: jest.fn(),
-    setRequiresUserPrivacyConsent: jest.fn(),
-    setNotificationWillShowInForegroundHandler: jest.fn(),
-    getDeviceState: jest.fn()
-  }
-})
+
+jest.mock('react-native-onesignal', () => ({
+  OneSignal: jest.fn(),
+  setAppId: jest.fn(),
+  setRequiresUserPrivacyConsent: jest.fn(),
+  setLogLevel: jest.fn(),
+  setNotificationWillShowInForegroundHandler: jest.fn(),
+  getDeviceState: jest.fn(),
+}))
 
 
 jest.mock('react-native-reanimated', () => {
