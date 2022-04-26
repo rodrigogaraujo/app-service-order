@@ -6,11 +6,13 @@ Using tools like react-native-testing-library, react-query, reanimated and other
 - React native - with expo
 - Styled components
 - React query
-- React native testing library
+- React native testing library + miragejs
 - React query
 - Reanimated
 - React Rook Form
 - Yup
+- Sentry
+- Storybook
 
 # Prints
 
