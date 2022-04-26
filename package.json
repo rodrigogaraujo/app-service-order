@@ -24,6 +24,7 @@
     "@react-native-community/async-storage": "^1.12.1",
     "@react-navigation/native": "^6.0.10",
     "@react-navigation/native-stack": "^6.6.1",
+    "@sentry/react-native": "^3.4.1",
     "axios": "^0.26.1",
     "eslint-config-airbnb": "^19.0.4",
     "expo": "~44.0.2",
@@ -81,10 +82,12 @@
     "eslint-plugin-react-hooks": "^4.4.0",
     "jest": "^27.5.1",
     "jest-expo": "^44.0.1",
+    "miragejs": "^0.1.43",
     "prettier": "^2.6.2",
     "reactotron-react-native": "^5.0.1",
     "ts-node": "^10.7.0",
-    "typescript": "~4.3.5"
+    "typescript": "~4.3.5",
+    "xmlhttprequest": "^1.8.0"
   },
   "private": true,
   "resolutions": {

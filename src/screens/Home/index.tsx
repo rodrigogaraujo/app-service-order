@@ -3,15 +3,19 @@ import OneSignal from 'react-native-onesignal'
 import { ActivityIndicator, Alert, Dimensions, ScrollView, View } from 'react-native'
 import { useTheme } from 'styled-components'
 import Snackbar from 'react-native-snackbar'
+import * as Sentry from '@sentry/react-native'
 
 import { ONE_SIGNAL_KEY } from '@env'
 import { useGetServiceOrders } from '~/services/useServiceOrder'
 import { ServiceOrderRow } from './components/ServiceOrderRow'
 import { SafeArea } from '~/components/SafeArea'
 import { Container, H3 } from '~/components'
+import { Button } from '~/components/Button'
+import { useAuth } from '~/hooks/Auth'
 
 export const Home = () => {
   const theme = useTheme()
+  const { signOut } = useAuth()
   const { width, height } = Dimensions.get('window')
   const { isLoading, data, isError, error } = useGetServiceOrders()
 
@@ -28,6 +32,7 @@ export const Home = () => {
           : 'tente novamente mais tarde.'
       }`
     )
+    Sentry.captureException(error)
   }
 
   useEffect(() => {
@@ -78,9 +83,16 @@ export const Home = () => {
               alignItems: 'center',
               height,
               width,
+              padding: 30,
             }}
           >
             <H3 color='primary'>Sem ordem de serviço no momento</H3>
+            <Button
+              style={{ marginTop: 'auto' }}
+              text='Sair'
+              loading={false}
+              onPress={() => signOut()}
+            />
           </View>
         )}
       </ScrollView>

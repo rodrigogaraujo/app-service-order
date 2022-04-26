@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-community/async-storage'
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import OneSignal from 'react-native-onesignal'
+import * as Sentry from '@sentry/react-native'
 
 import api from '~/services/api'
 import { User } from '~/services/useLogin'
@@ -77,6 +78,7 @@ export const AuthProvider: React.FC = ({ children }: any) => {
       )
     } catch (er) {
       console.log(er)
+      Sentry.captureException(er)
     }
   }
 

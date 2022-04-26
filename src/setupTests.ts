@@ -1,10 +1,18 @@
 import '@testing-library/jest-native/extend-expect'
 import { cleanup } from '@testing-library/react-native'
+import { createServer  } from "miragejs"
 import { queryClient } from './App'
+
+export let server: any
+
+beforeEach(() => {
+  server = createServer()
+})
 
 afterEach(() => {
   cleanup()
   queryClient.clear()
+  server.shutdown()
 })
 
 jest.mock('@react-native-community/async-storage', () =>

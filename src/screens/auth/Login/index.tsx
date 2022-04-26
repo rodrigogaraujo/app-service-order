@@ -4,13 +4,20 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import Snackbar from 'react-native-snackbar'
 import { useTheme } from 'styled-components'
+import * as Sentry from '@sentry/react-native'
 
 import { SignInCredentials, useAuth } from '~/hooks/Auth'
-import { Container } from '~/components'
+import { Container, Label } from '~/components'
 import { Input } from '~/components/Input'
 import { SafeArea } from '~/components/SafeArea'
 import { LineEmoji } from './components/LineEmoji'
-import { TitleLogin, WrapperButton, WrapperForm } from './styles'
+import {
+  TitleLogin,
+  WrapperButton,
+  ButtonCreateAccount,
+  WrapperForm,
+  ButtonForgotPass,
+} from './styles'
 import { Button } from '~/components/Button'
 import { useLogin } from '~/services/useLogin'
 import { ScrollView } from 'react-native'
@@ -42,7 +49,6 @@ export const Login = () => {
       setLoading(true)
       const { email, password } = data
       login.mutate({ email, password })
-      setLoading(false)
     } catch (er) {
       setLoading(false)
     }
@@ -61,6 +67,7 @@ export const Login = () => {
           fontFamily: theme.font.regular,
         })
       }
+      setLoading(false)
     },
     onError: (er) => {
       Snackbar.show({
@@ -77,6 +84,8 @@ export const Login = () => {
         backgroundColor: theme.colors.secondary,
         fontFamily: theme.font.regular,
       })
+      setLoading(false)
+      Sentry.captureException(er)
     },
   })
 
@@ -128,6 +137,9 @@ export const Login = () => {
               )}
             />
             <WrapperButton>
+              <ButtonForgotPass>
+                <Label>Esqueceu sua senha?</Label>
+              </ButtonForgotPass>
               <Button
                 text='Entrar'
                 loading={loading}
@@ -135,6 +147,10 @@ export const Login = () => {
                 testID='login-button'
               />
             </WrapperButton>
+            <ButtonCreateAccount>
+              <Label>Não possui conta? </Label>
+              <Label color='primary'>Crie a sua aqui</Label>
+            </ButtonCreateAccount>
           </WrapperForm>
         </Container>
       </ScrollView>

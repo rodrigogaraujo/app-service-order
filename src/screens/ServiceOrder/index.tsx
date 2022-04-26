@@ -14,7 +14,7 @@ import { RootStackParamList } from '~/routes'
 import { handlePriority, handleStatus } from '../Home/components/ServiceOrderRow'
 import { WrapperDescriptionServiceOrder, StyedH3, StyedH2, ButtonIcon } from './styles'
 import ConfirmModal from '~/components/ConfirmModal'
-import { useGetServiceOrders, useUpdateServiceOrderStatus } from '~/services/useServiceOrder'
+import { useUpdateServiceOrderStatus } from '~/services/useServiceOrder'
 
 type ServiceOrderProps = NativeStackScreenProps<RootStackParamList, 'ServiceOrder'>
 
